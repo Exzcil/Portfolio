@@ -7,8 +7,8 @@ import "./globals.css";
 import { PageTransition } from "@/components/ui/page-transition";
 
 export const metadata: Metadata = {
-  title: "Portfolio | UX Designer",
-  description: "UX Designer Portfolio — 理性分析 × 感性体验",
+  title: "Portfolio",
+  description: "my-Portfolio ",
 };
 
 export default function RootLayout({

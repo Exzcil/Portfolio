@@ -1,0 +1,14 @@
+.theme-a {
+  --color-surface: #fafafa;
+  --color-on-surface: #171717;
+  --color-surface-alt: #f0fdf4;
+  --color-accent: #059669;
+  --color-accent-dim: #34d399;
+  --color-subtle: #e5e7eb;
+  --color-muted: #9ca3af;
+
+  --font-family-display: "Space Grotesk", ui-serif, serif;
+
+  --section-gap: 4rem;
+  --card-radius: 0.75rem;
+}

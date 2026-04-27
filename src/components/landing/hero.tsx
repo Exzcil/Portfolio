@@ -3,38 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-} as const;
-
 const titleVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: "easeOut" as const },
-  },
-} as const;
-
-const introVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-} as const;
-
-const tagVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 } as const;
 
@@ -169,8 +143,18 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         data-section="hero"
-        className="relative h-[85vh] min-h-[600px] bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-white overflow-hidden"
+        className="relative h-[92vh] min-h-[600px] bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 text-white overflow-hidden"
       >
+        {/* Top-left 首页 navigation */}
+        <div className="fixed top-6 left-8 sm:left-16 z-[110]">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="text-sm text-white/50 hover:text-white/90 transition-colors"
+          >
+            首页
+          </button>
+        </div>
+
         {/* Background — barely perceptible scale-in */}
         <motion.div
           initial={{ scale: 1.05 }}
@@ -183,78 +167,29 @@ export function Hero() {
           {/* Top spacer */}
           <div />
 
-          {/* Center content — staggered entry */}
+          {/* Center content — individual entry timing */}
           <div className="max-w-[90rem] w-full mx-auto">
+            {/* Layer 1: Main title + buttons — 0s */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex items-end justify-between gap-6"
             >
-              {/* Layer 1: Main title + buttons — 0s */}
-              <motion.div
-                variants={titleVariants}
-                className="flex items-end justify-between gap-6"
-              >
-                <h1 className="text-7xl sm:text-9xl md:text-[10rem] font-medium leading-[0.85] tracking-tighter">
-                  <span className="block">个人作品集</span>
-                </h1>
+              <h1 className="text-7xl sm:text-9xl md:text-[10rem] font-medium leading-[0.85] tracking-tighter">
+                <span className="block">个人作品集</span>
+              </h1>
 
-                {/* Desktop buttons */}
-                <AnimatePresence mode="popLayout">
-                  {!pinned ? (
-                    <motion.div
-                      key="hero-btns"
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      className="hidden sm:flex items-center gap-3 shrink-0 pb-2"
-                    >
-                      <motion.a
-                        layoutId="btn-a"
-                        href="#project-01"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handlePin("a", "project-01");
-                        }}
-                        className={btnClass("kaizhi")}
-                      >
-                        Ai咔智食谱
-                        <span className="text-xs leading-none">→</span>
-                      </motion.a>
-                      <motion.a
-                        layoutId="btn-b"
-                        href="#project-02"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handlePin("b", "project-02");
-                        }}
-                        className={btnClass("netease")}
-                      >
-                        网易云重塑
-                        <span className="text-xs leading-none">→</span>
-                      </motion.a>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="hero-spacer"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="hidden sm:block w-[240px] shrink-0 pb-2"
-                    />
-                  )}
-                </AnimatePresence>
-              </motion.div>
-
-              {/* Layer 2: Mobile buttons — 0.2s */}
-              <AnimatePresence>
-                {!pinned && (
+              {/* Desktop buttons */}
+              <AnimatePresence mode="popLayout">
+                {!pinned ? (
                   <motion.div
-                    key="mobile-btns"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="sm:hidden flex flex-col items-start gap-3 mt-6"
+                    key="hero-btns"
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="hidden sm:flex items-center gap-3 shrink-0 pb-2"
                   >
-                    <a
+                    <motion.a
+                      layoutId="btn-a"
                       href="#project-01"
                       onClick={(e) => {
                         e.preventDefault();
@@ -264,8 +199,9 @@ export function Hero() {
                     >
                       Ai咔智食谱
                       <span className="text-xs leading-none">→</span>
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
+                      layoutId="btn-b"
                       href="#project-02"
                       onClick={(e) => {
                         e.preventDefault();
@@ -275,38 +211,95 @@ export function Hero() {
                     >
                       网易云重塑
                       <span className="text-xs leading-none">→</span>
-                    </a>
+                    </motion.a>
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="hero-spacer"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="hidden sm:block w-[240px] shrink-0 pb-2"
+                  />
                 )}
               </AnimatePresence>
+            </motion.div>
 
-              {/* Layer 3: Intro — 0.4s */}
-              <motion.div variants={introVariants}>
-                <div className="mt-12 sm:mt-16">
-                  <span className="text-2xl sm:text-4xl md:text-5xl font-light text-white/30 tracking-tight">
-                    产品设计
-                  </span>
-                </div>
-                <div className="mt-16 sm:mt-24" />
-                <p className="max-w-sm text-sm sm:text-base text-white/40 leading-relaxed font-light">
-                  理性分析驱动产品架构，感性体验塑造品牌温度。两种设计语言，一个创作者。
-                </p>
-              </motion.div>
-
-              {/* Layer 4: Tags — 0.6s, visually subdued */}
-              <motion.div
-                variants={tagVariants}
-                className="mt-8 flex flex-wrap gap-x-5 gap-y-2"
-              >
-                {["用户研究", "交互设计", "品牌体验", "数据可视化"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[11px] text-white/50 tracking-wider"
+            {/* Layer 2: Mobile buttons — 0.2s */}
+            <AnimatePresence>
+              {!pinned && (
+                <motion.div
+                  key="mobile-btns"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="sm:hidden flex flex-col items-start gap-3 mt-6"
+                >
+                  <a
+                    href="#project-01"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePin("a", "project-01");
+                    }}
+                    className={btnClass("kaizhi")}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
+                    Ai咔智食谱
+                    <span className="text-xs leading-none">→</span>
+                  </a>
+                  <a
+                    href="#project-02"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePin("b", "project-02");
+                    }}
+                    className={btnClass("netease")}
+                  >
+                    网易云重塑
+                    <span className="text-xs leading-none">→</span>
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Layer 3: Subtitle — 0.2s */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="mt-12 sm:mt-16"
+            >
+              <span className="text-2xl sm:text-4xl md:text-5xl font-light text-white/30 tracking-tight">
+                产品设计
+              </span>
+            </motion.div>
+
+            {/* Layer 4: Intro text — 0.3s */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="mt-16 sm:mt-24"
+            >
+              <p className="max-w-sm text-sm sm:text-base text-white/40 leading-relaxed font-light">
+                理性分析驱动产品架构，感性体验塑造品牌温度。两种设计语言，一个创作者。
+              </p>
+            </motion.div>
+
+            {/* Layer 5: Tags — 0.4s, visually subdued */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              className="mt-8 flex flex-wrap gap-x-5 gap-y-2"
+            >
+              {["用户研究", "交互设计", "品牌体验", "数据可视化"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[11px] text-white/50 tracking-wider"
+                >
+                  {tag}
+                </span>
+              ))}
             </motion.div>
           </div>
 
@@ -330,6 +323,9 @@ export function Hero() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Bottom gradient fade — smooth edge into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent pointer-events-none" />
       </motion.section>
     </>
   );

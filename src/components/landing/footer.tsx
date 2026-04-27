@@ -9,7 +9,7 @@ export function Footer() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
       viewport={{ once: true }}
-      className="pt-24 pb-16 sm:pt-32 sm:pb-20 px-8 sm:px-16"
+      className="bg-neutral-950 pt-24 pb-16 sm:pt-32 sm:pb-20 px-8 sm:px-16"
     >
       {/* Small end marker */}
       <div className="max-w-7xl mx-auto">
@@ -25,7 +25,7 @@ export function Footer() {
             <span className="text-white">丁彤华</span>
           </p>
           <p className="text-sm text-white/20 tracking-wide">
-            13752648712
+            15727397642
           </p>
         </div>
       </div>

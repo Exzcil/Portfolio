@@ -15,10 +15,10 @@ export function ContactSection() {
             Email
           </a>
           <a
-            href="#"
+            href="tel:13752648712"
             className="text-white/40 hover:text-white transition-colors underline underline-offset-4 decoration-white/10 hover:decoration-white/40"
           >
-            LinkedIn
+            Phone
           </a>
         </div>
       </div>

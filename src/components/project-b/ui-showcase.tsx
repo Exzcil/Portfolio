@@ -21,7 +21,7 @@ export function B_UIShowcase() {
 
   return (
     <section ref={ref} className="py-32 sm:py-40 px-8 sm:px-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}

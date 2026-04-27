@@ -20,14 +20,14 @@ export default function ProjectBLayout({
       <div className="fixed top-6 left-6 sm:top-8 sm:left-8 z-50 flex flex-col gap-2">
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-sm text-white/40 hover:text-white/80 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-white/65 hover:text-white/90 transition-colors"
         >
           <span className="text-base leading-none">←</span>
           <span>返回首页</span>
         </Link>
         <Link
           href="/project-a"
-          className="flex items-center gap-1.5 text-sm text-white/25 hover:text-white/60 transition-colors pl-[1.35rem]"
+          className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white/80 transition-colors pl-[1.35rem]"
         >
           <span className="text-xs">AI Agent 咔智食谱</span>
         </Link>

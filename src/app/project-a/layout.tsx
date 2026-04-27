@@ -19,10 +19,17 @@ export default function ProjectALayout({
     <div className="theme-a font-sans bg-surface text-on-surface selection:bg-accent/20">
       <Link
         href="/"
-        className="fixed top-6 left-6 sm:top-8 sm:left-8 z-50 flex items-center gap-1.5 text-sm text-muted/50 hover:text-muted/90 transition-colors"
+        className="fixed top-6 left-6 sm:top-8 sm:left-8 z-50 flex items-center gap-1.5 text-sm text-muted/70 hover:text-muted/90 transition-colors"
       >
         <span className="text-base leading-none">←</span>
         <span>返回首页</span>
+      </Link>
+      <Link
+        href="/project-b"
+        className="fixed top-14 left-6 sm:top-[4.5rem] sm:left-8 z-50 flex items-center gap-1.5 text-sm text-muted/70 hover:text-muted/90 transition-colors"
+      >
+        <span>网易云音乐-非官方重塑</span>
+        <span className="text-base leading-none">→</span>
       </Link>
       {children}
     </div>

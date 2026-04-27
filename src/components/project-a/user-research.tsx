@@ -41,10 +41,10 @@ export function A_UserResearch({
                 {persona.name.charAt(0)}
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-display font-medium text-on-surface leading-tight">
+                <h3 className="text-xl sm:text-2xl font-display font-medium text-on-surface/85 leading-tight">
                   {persona.name}
                 </h3>
-                <p className="text-sm text-muted mt-0.5">{persona.role}</p>
+                <p className="text-sm text-muted/80 mt-0.5">{persona.role}</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@ export function A_UserResearch({
               {persona.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs text-muted/50 tracking-wide"
+                  className="text-xs text-muted/75 tracking-wide"
                 >
                   {tag}
                 </span>
@@ -78,9 +78,45 @@ export function A_UserResearch({
 
       {/* Journey timeline — editorial */}
       <div>
-        <h3 className="text-xs text-muted/40 tracking-[0.25em] uppercase mb-12">
+        <h3 className="text-xs text-muted/60 tracking-[0.25em] uppercase mb-12">
           用户旅程 · 典型一天
         </h3>
+
+        {/* Progress indicator — hidden on mobile */}
+        <div className="relative mb-10 hidden sm:block">
+          {/* Connecting line — fills left to right on scroll */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-40px" }}
+            className="absolute top-1/2 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-emerald-400/10 via-emerald-400/40 to-emerald-400/10 origin-left -translate-y-1/2 rounded-full"
+          />
+
+          {/* Nodes — staggered */}
+          <div className="grid sm:grid-cols-4 gap-8 sm:gap-6">
+            {journeyStages.map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.6 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: i * 0.12 }}
+                viewport={{ once: true, margin: "-40px" }}
+                className="flex justify-center"
+              >
+                <div
+                  className={`w-2.5 h-2.5 rounded-full transition-colors duration-500 ${
+                    i <= 1
+                      ? "bg-emerald-400/60"
+                      : i === 2
+                        ? "bg-emerald-400/40"
+                        : "bg-emerald-400/20"
+                  }`}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         <div className="grid sm:grid-cols-4 gap-8 sm:gap-6">
           {journeyStages.map((stage, i) => {
@@ -102,12 +138,12 @@ export function A_UserResearch({
                 </span>
 
                 {/* Stage title */}
-                <h4 className="text-base sm:text-lg font-medium text-on-surface mb-2">
+                <h4 className="text-base sm:text-lg font-medium text-on-surface/85 mb-2">
                   {stage.stage}
                 </h4>
 
                 {/* Description */}
-                <p className="text-sm text-muted leading-relaxed mb-5">
+                <p className="text-sm text-muted/80 leading-relaxed mb-5">
                   {stage.description}
                 </p>
 

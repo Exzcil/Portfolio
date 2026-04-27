@@ -77,6 +77,16 @@ export function B_HeroSection({
         >
           {subtitle}
         </motion.p>
+
+        {/* Unofficial rebrand tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="text-base sm:text-lg text-white/20 max-w-xl leading-relaxed font-light mt-3"
+        >
+          非官方概念重塑
+        </motion.p>
       </motion.div>
 
       {/* Bottom fade */}

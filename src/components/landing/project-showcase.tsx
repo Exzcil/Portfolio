@@ -75,7 +75,7 @@ function ProjectBlock({
 
           {/* Bottom content */}
           <div
-            className={`flex flex-col ${
+            className={`flex flex-col w-full ${
               isLeft ? "items-start text-left" : "items-end text-right"
             }`}
           >
@@ -113,8 +113,8 @@ function ProjectBlock({
             </div>
 
             {/* Hover indicator */}
-            <div className="mt-8 flex items-center gap-2 text-white/15 text-xs opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-              <span>查看案例</span>
+            <div className={`mt-8 flex items-center gap-2 text-white/40 text-xs transition-all duration-500 ${isLeft ? "self-end" : ""}`}>
+              <span>点击查看案例</span>
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
@@ -130,7 +130,9 @@ export function ProjectShowcase() {
   return (
     <section>
       {projects.map((project) => (
-        <ProjectBlock key={project.number} project={project} />
+        <div key={project.number} id={`project-${project.number}`} data-section={project.number === "01" ? "kaizhi" : "netease"}>
+          <ProjectBlock project={project} />
+        </div>
       ))}
     </section>
   );
